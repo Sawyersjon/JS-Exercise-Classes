@@ -86,11 +86,15 @@ class Airplane {
      return this.tank = this.tank + gallons;
    }
    drive(distance){
-     if(this.tank > 0){
-       return this.odometer = this.odometer + distance; 
+     const drivableMiles = this.tank * this.milesPerGallon;
+     if(distance <= drivableMiles){
+       this.odometer += this.odometer + distance;
+       this.tank -= (distance/this.milesPerGallon); 
      }
-     else if(this.odometer){
-       return this.tank = this.tank - gallons;
+     else{
+       this.odometer += drivableMiles;
+       this.tank = 0
+       return `I ran out of fuel at ${this.odometer} miles!`;
      }
    }
 
@@ -143,8 +147,8 @@ class Airplane {
    demo(subject){
      return `Today we are learning about ${subject}`;
    }
-   grade(studentname, subject){
-     `${student.name} receives a perfect score on ${subject}`
+   grade(student, subject){
+     return `${student.name} receives a perfect score on ${subject}`
    }
  }
   /*
@@ -200,11 +204,11 @@ class Airplane {
    this.gradClassName = attrs.gradClassName;
    this.favInstructor = attrs.favInstructor;
    }
-   standUp(name, channel){
-     return `${name} announces to ${channel}, @channel standy times!'`
+   standUp(channel){
+     return `${this.name} announces to ${channel}, @channel standy times!'`
    }
-   debugsCode(name, subject){
-     return `${name} debugs ${student.name}'s code on ${subject}`
+   debugsCode(student, subject){
+     return `${this.name} debugs ${student.name}'s code on ${subject}`
    }
      
  }
